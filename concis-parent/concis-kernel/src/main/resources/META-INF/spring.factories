@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.joycoho.concis.kernel.db.druid.config.SingleDataSourceConfig,\
+  com.joycoho.concis.kernel.context.config.SpringContextConfiguration

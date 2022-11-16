@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joycoho.concis.sys.modular.user.dao.UserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.joycoho.concis.sys.modular.user.entity.User">
+		<id column="id" property="id" />
+		<result column="avatar" property="avatar" />
+		<result column="account" property="account" />
+		<result column="password" property="password" />
+		<result column="salt" property="salt" />
+		<result column="name" property="name" />
+		<result column="birthday" property="birthday" />
+		<result column="sex" property="sex" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="dept_id" property="deptId" />
+		<result column="role_id" property="roleId" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="version" property="version" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, account, name, birthday, sex, email, avatar,
+		phone, role_id,
+		dept_id, status,
+		create_time, version
+	</sql>
+
+	<sql id="Base_Column_List_With_Pwd">
+		id, account, name, birthday,password, sex, email, avatar,
+		phone, roleid,salt,
+		dept_id, status,
+		create_time, version
+	</sql>
+
+	<select id="selectUsers" resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where status != 3
+		<if test="name != null and name != ''">
+			and (phone like CONCAT('%',#{name},'%')
+			or account like CONCAT('%',#{name},'%')
+			or name like CONCAT('%',#{name},'%'))
+		</if>
+		<if test="dept_id != null and dept_id != 0">
+			and (dept_id = #{dept_id} or dept_id in ( select id from sys_dept where pids like CONCAT('%[', #{dept_id}, ']%') ))
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			and (createTime between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+		</if>
+	</select>
+
+	<update id="setStatus">
+		update sys_user set status = #{status} where id =
+		#{userId}
+	</update>
+
+	<update id="changePwd">
+		update sys_user set password = #{pwd} where id =
+		#{userId}
+	</update>
+
+	<update id="setRoles">
+		update sys_user set roleid = #{roleIds} where id =
+		#{userId}
+	</update>
+
+	<select id="getByAccount" resultType="com.joycoho.concis.sys.modular.user.entity.User">
+		select
+		<include refid="Base_Column_List_With_Pwd" />
+		from sys_user where account = #{account} and status != 3
+	</select>
+
+	<!--查询某个部门下的某个用户-->
+	<select id="getUserByDept" resultType="com.joycoho.concis.sys.modular.user.entity.User">
+		select
+		a.id, account, a.`name`, birthday,password, sex, email, avatar,
+		phone, roleid,salt,
+		dept_id, status,
+		createtime, a.`version`
+		from sys_user a
+		left join sys_dept b ON b.id = a.dept_id
+		where 1=1
+		and account = #{account} and status != 3
+		and b.simplename = #{dept}
+	</select>
+
+	<select id="findUserInDept" resultType="com.joycoho.concis.sys.modular.user.entity.User">
+		select
+		<include refid="Base_Column_List_With_Pwd" />
+		from sys_user
+		where status != 3
+		<if test="account != null and account != ''">
+			and account = #{account}
+		</if>
+		<if test="dept_id != null and dept_id != 0">
+			and (dept_id = #{dept_id} or dept_id in ( select id from sys_dept where pids like CONCAT('%[', #{dept_id}, ']%') ))
+		</if>
+	</select>
+	<!-- 分页查询系统用户 -->
+	<select id="selectPages" resultMap="BaseResultMap">
+		select a.*, b.name as roleName
+		from sys_user a
+		left join sys_role b on a.role_id = b.id
+		where a.status != 3
+		<if test="condition.name != null and condition.name != ''">
+			and (
+			a.name like CONCAT('%',#{condition.name},'%')
+			or a.account like CONCAT('%',#{condition.name},'%')
+			or a.phone like CONCAT('%',#{condition.name},'%')
+			)
+		</if>
+	</select>
+
+</mapper>
