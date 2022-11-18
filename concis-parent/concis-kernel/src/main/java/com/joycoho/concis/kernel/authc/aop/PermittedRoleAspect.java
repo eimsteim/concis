@@ -1,5 +1,5 @@
 /**
- * Copyright 2018-2020 stylefeng & fengshuonan (https://gitee.com/stylefeng)
+ * Copyright 2022-2025 charlie.zhang (https://github.com/eimsteim/concis)
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 /**
  * 权限检查的aop
  *
- * @author fengshuonan
+ * @author charlie.zhang
  * @date 2017-07-13 21:05
  */
 @Aspect
