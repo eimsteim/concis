@@ -25,7 +25,7 @@
 与其他快速开发框架不同，`Concis`并不能直接启动运行，而是需要嵌入开发者自己的业务工程，具体方法如下：
 
 1. 使用`Git`拉取`concis-parent`源代码到本地；
-2. 使用`Maven`分别`instlal`安装`concis-kernel`和`concis-sys`模块；
+2. 使用`Maven`分别`install`安装`concis-kernel`和`concis-sys`模块；
 3. 新建一个Spring Boot工程（后简称A），并将`init.sql`初始化到`MySQL`数据库；
 4. 在A工程的`pom.xml`文件中引入`concis-sys`依赖；
 5. 在A工程的`/src/main/`目录下新建`web`文件夹；
