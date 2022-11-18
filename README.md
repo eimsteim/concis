@@ -1,16 +1,10 @@
 ## Concis 
 
+[![spring-boot](https://img.shields.io/badge/spring--boot-2.6.4-green.svg) ](https://gitee.com/link?target=http%3A%2F%2Fspring.io%2Fprojects%2Fspring-boot)[![mybatis-plus](https://img.shields.io/badge/mybatis--plus-3.5.2-blue.svg) ](https://gitee.com/link?target=http%3A%2F%2Fmp.baomidou.com)[![MySQL](https://img.shields.io/badge/MySQL-5.7-9cf.svg) ](https://gitee.com/link?target=https%3A%2F%2Fwww.hutool.cn%2F)[![beetl](https://img.shields.io/badge/antd-4.20.0-red.svg)](https://gitee.com/link?target=http%3A%2F%2Fibeetl.com%2F)[![React](https://img.shields.io/badge/React-17.0.0-yellow.svg)](https://gitee.com/link?target=http%3A%2F%2Fibeetl.com%2F)
+
 `Concis` 是一个极致简洁的后台管理系统快速开发脚手架，技术栈采用Spring Boot + Ant Design Pro，Concis 的本意就是`简洁`，我们不希望在这个框架里加入过多的功能，只想把后台管理系统所必须的功能做到极致。
 
-###  技术选型
 
-| 软件名称     | 软件版本 |
-| ------------ | -------- |
-| Spring Boot  | 2.6.4    |
-| Mybatis Plus | 3.5.2    |
-| MySQL        | 5.7      |
-| Ant Design   | 4.20.0   |
-| React        | 17.0.0   |
 
 ### 设计特点
 
@@ -43,4 +37,6 @@
 ### 开发文档
 
 详细开发文档可以关注我的公众号，回复`concis`获取访问地址:laughing:
+
+
 
