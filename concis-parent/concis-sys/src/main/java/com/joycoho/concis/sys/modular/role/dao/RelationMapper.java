@@ -1,5 +1,5 @@
 /**
- * Copyright 2022-2025 charlie.zhang (https://github.com/eimsteim/concis)
+ * Copyright 2022-2025 Leo (https://github.com/eimsteim/concis)
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.util.List;
  * 角色和菜单关联表 Mapper 接口
  * </p>
  *
- * @author charlie.zhang
+ * @author Leo
  * @since 2017-07-11
  */
 public interface RelationMapper extends BaseMapper<Relation> {

@@ -28,7 +28,7 @@ public interface IRoleService extends IService<Role> {
     /**
      * 删除角色
      *
-     * @author charlie.zhang
+     * @author Leo
      * @Date 2017/5/5 22:24
      */
     void delRoleById(Integer roleId);

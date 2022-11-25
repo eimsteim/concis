@@ -21,7 +21,7 @@ public class HttpContext {
     /**
      * 获取请求的ip地址
      *
-     * @author charlie.zhang
+     * @author Leo
      * @Date 2018/7/23 下午3:44
      */
     public static String getIp() {
@@ -36,7 +36,7 @@ public class HttpContext {
     /**
      * 获取当前请求的Request对象
      *
-     * @author charlie.zhang
+     * @author Leo
      * @Date 2018/7/23 下午3:44
      */
     public static HttpServletRequest getRequest() {
@@ -51,7 +51,7 @@ public class HttpContext {
     /**
      * 获取当前请求的Response对象
      *
-     * @author charlie.zhang
+     * @author Leo
      * @Date 2018/7/23 下午3:44
      */
     public static HttpServletResponse getResponse() {
@@ -66,7 +66,7 @@ public class HttpContext {
     /**
      * 获取所有请求的值
      *
-     * @author charlie.zhang
+     * @author Leo
      * @Date 2018/7/23 下午3:44
      */
     public static Map<String, String> getRequestParameters() {
