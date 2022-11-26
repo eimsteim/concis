@@ -20,29 +20,53 @@ public class DruidProperties {
     private String password;
 
     private String driverClassName;
-
+    /**
+     * 初始化时建立的物理连接个数
+     */
     private Integer initialSize = 2;
-
+    /**
+     * 连接池最小连接数
+     */
     private Integer minIdle = 1;
-
+    /**
+     * 连接池最大连接数
+     */
     private Integer maxActive = 20;
-
+    /**
+     * 获取连接时最大等待时间，单位毫秒
+     */
     private Integer maxWait = 60000;
 
     private Integer timeBetweenEvictionRunsMillis = 60000;
-
+    /**
+     * 销毁线程时检测当前连接的最后活动时间和当前时间的差，大于该值时，关闭当前连接
+     */
     private Integer minEvictableIdleTimeMillis = 300000;
-
+    /**
+     * 用来检测连接是否有效的SQL，必须是一个查询语句
+     * MySQL中的为 select 'x'
+     * Oracle中的为 select 1 from dual
+     */
     private String validationQuery = "SELECT 'x'";
-
+    /**
+     * 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+     */
     private Boolean testWhileIdle = true;
-
+    /**
+     * 申请连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
+     */
     private Boolean testOnBorrow = false;
-
+    /**
+     * 归还连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
+     */
     private Boolean testOnReturn = false;
-
+    /**
+     * 是否缓存preparedStatement，MySQL5.5+建议开启
+     */
     private Boolean poolPreparedStatements = true;
-
+    /**
+     * 当值大于0时poolPreparedStatements会自动修改为true
+     */
     private Integer maxPoolPreparedStatementPerConnectionSize = 20;
 
     private String filters = "stat";
