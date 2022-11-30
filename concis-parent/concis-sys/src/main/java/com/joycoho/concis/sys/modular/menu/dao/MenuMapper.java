@@ -53,6 +53,8 @@ public interface MenuMapper extends BaseMapper<Menu> {
      */
     List<MenuNode> getMenusByRoleIds(@Param("list") List<Integer> roleIds, @Param("ismenu") Integer ismenu);
 
+    List<MenuNode> getMenusByRoleIds(@Param("appCode") String appCode, @Param("list") List<Integer> roleIds, @Param("ismenu") Integer ismenu);
+
     /**
      * 查询某个角色包含的所有菜单ID
      * @param roleId

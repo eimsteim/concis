@@ -68,6 +68,8 @@ public class MenuNode implements Comparable {
      */
     private String icon;
 
+    private String appCode;
+
     /**
      * 子节点的集合
      */
@@ -170,6 +172,14 @@ public class MenuNode implements Comparable {
 
     public void setIsmenu(Integer ismenu) {
         this.ismenu = ismenu;
+    }
+
+    public String getAppCode() {
+        return appCode;
+    }
+
+    public void setAppCode(String appCode) {
+        this.appCode = appCode;
     }
 
     @Override

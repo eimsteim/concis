@@ -41,6 +41,13 @@ public interface IMenuService extends IService<Menu> {
      * @return
      */
     List<MenuNode> getMenusByRoleIds(List<Integer> roleIds, boolean onlyMenu);
+    /**
+     * 根据角色集查询所有资源
+     * @param roleIds  角色ID集
+     * @param onlyMenu 仅查询菜单（不查询功能型资源）
+     * @return
+     */
+    List<MenuNode> getMenusByRoleIds(String appCode, List<Integer> roleIds, boolean onlyMenu);
 
     List<String> getMenuIdsByRoleIds(List<Integer> roleIds, boolean onlyMenu);
 }

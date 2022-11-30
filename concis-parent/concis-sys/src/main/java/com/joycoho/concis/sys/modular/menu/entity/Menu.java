@@ -75,5 +75,9 @@ public class Menu extends Model<Menu> {
      * 是否打开:    1:打开   0:不打开
      */
     private Integer isopen;
+    /**
+     * 菜单所属的应用编码
+     */
+    private String appCode;
 
 }

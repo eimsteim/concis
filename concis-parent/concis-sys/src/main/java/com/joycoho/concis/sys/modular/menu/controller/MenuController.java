@@ -118,7 +118,7 @@ public class MenuController {
      * @return
      */
     @RequestMapping("/listTree")
-    public List<MenuNode> listTree() {
+    public List<MenuNode> listTree(String appCode) {
         //查询当前登录用户
         User currentUser = UserContext.getUser();
         //查询用户角色集，roleid可能是多个，以逗号分隔
@@ -133,7 +133,7 @@ public class MenuController {
         } else {//如果只有一个，添加自己
             roleIds.add(Integer.valueOf(roleId));
         }
-        return menuService.getMenusByRoleIds(roleIds, true);
+        return menuService.getMenusByRoleIds(appCode, roleIds, true);
     }
 
     @RequestMapping("/listAllByTree")

@@ -33,4 +33,6 @@ public class MenuForm {
     private Integer num;
 
     private String path;
+
+    private String appCode;
 }

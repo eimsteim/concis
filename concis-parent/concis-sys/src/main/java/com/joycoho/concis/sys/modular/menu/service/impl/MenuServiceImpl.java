@@ -7,10 +7,12 @@ import com.joycoho.concis.sys.modular.menu.entity.Menu;
 import com.joycoho.concis.sys.modular.menu.entity.MenuNode;
 import com.joycoho.concis.sys.modular.menu.service.IMenuService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -81,8 +83,26 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
     @Override
     public List<MenuNode> getMenusByRoleIds(List<Integer> roleIds, boolean onlyMenu) {
-        Integer ismenu = onlyMenu ? 1 : null;
-        List<MenuNode> menus = menuMapper.getMenusByRoleIds(roleIds, ismenu);
+        return getMenusByRoleIds(null, roleIds, onlyMenu);
+    }
+
+    @Override
+    public List<MenuNode> getMenusByRoleIds(String appCode, List<Integer> roleIds, boolean onlyMenu) {
+        List<MenuNode> menus = null;
+        //如果appCode是空的，或者是home，那么就返回只包含首页的菜单树
+        if (StringUtils.isBlank(appCode) || "home".equals(appCode)) {
+            menus = new ArrayList<>();
+            MenuNode node = new MenuNode();
+            node.setName("首页");
+            node.setPath("/home");
+            node.setIcon("Home");
+            node.setLevels(1);
+            menus.add(node);
+        } else {
+            //
+            Integer ismenu = onlyMenu ? 1 : null;
+            menus = menuMapper.getMenusByRoleIds(appCode, roleIds, ismenu);
+        }
         //将menuNodes转换为树形结构
         List<MenuNode> titles = MenuNode.buildTitle(menus);
         return titles;
@@ -91,7 +111,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<String> getMenuIdsByRoleIds(List<Integer> roleIds, boolean onlyMenu) {
         Integer ismenu = onlyMenu ? 1 : null;
-        List<MenuNode> menus = menuMapper.getMenusByRoleIds(roleIds, ismenu);
+        List<MenuNode> menus = menuMapper.getMenusByRoleIds(null, roleIds, ismenu);
         //提取菜单id
         List<String> menuIds = menus.stream().map(o -> String.valueOf(o.getId())).collect(Collectors.toList());
         return menuIds;
