@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -55,8 +56,22 @@ public class WebConfig implements WebMvcConfigurer {
                     "/error",           //错误
                     "/**/*.html",                //html静态资源
                     "/**/*.js",                  //js静态资源
-                    "/**/*.css"                  //css静态资源
+                    "/**/*.css",                 //css静态资源
+                    "/**/*.jpg",                 //css静态资源
+                    "/**/*.jpeg",                 //css静态资源
+                    "/**/*.png",                 //css静态资源
+                    "/**/*.bmp"                  //css静态资源
             );
         }
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .allowedMethods("*")
+                .maxAge(3600);
     }
 }
