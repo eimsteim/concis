@@ -44,4 +44,29 @@ public class PageFactory<T> {
             return page;
         }
     }
+
+    public Page<T> vuePage() {
+        HttpServletRequest request = HttpContext.getRequest();
+        int limit = Integer.valueOf(request.getParameter("limit"));     //pageSize
+        int current = Integer.valueOf(request.getParameter("page"));   //pageNum
+        String sort = request.getParameter("sort");         //排序字段名称
+        String order = request.getParameter("order");       //asc或desc(升序或降序)
+        Boolean searchCount = Boolean.FALSE;
+        if (StringUtils.isEmpty(sort)) {
+            PageDTO<T> page = new PageDTO<>(current, limit);
+            return page;
+        } else {
+            PageDTO<T> page = new PageDTO<>(current, limit, searchCount);
+            List<OrderItem> list = new ArrayList<>();
+            OrderItem orderItem;
+            if ("asc".equals(order)) {
+                orderItem = OrderItem.asc(sort);
+            } else {
+                orderItem = OrderItem.desc(sort);
+            }
+            list.add(orderItem);
+            page.setOrders(list);
+            return page;
+        }
+    }
 }
