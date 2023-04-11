@@ -133,7 +133,31 @@ public class MenuController {
         } else {//如果只有一个，添加自己
             roleIds.add(Integer.valueOf(roleId));
         }
-        return menuService.getMenusByRoleIds(appCode, roleIds, true);
+
+        List<MenuNode> result = menuService.getMenusByRoleIds(appCode, roleIds, true);
+        //TODO 处理结果级，避免出现结果集某些二级菜单没有可挂载的一级菜单
+        if (result.size() > 0 && result.get(0).getLevels() > 1) {
+            Menu parentMenu = menuService.getById(result.get(0).getParentId());
+
+            MenuNode node = new MenuNode();
+            node.setId(parentMenu.getId());
+            node.setParentId(0);
+            node.setName(parentMenu.getName());
+            node.setCode(parentMenu.getCode());
+            node.setLevels(parentMenu.getLevels());
+            node.setIsmenu(parentMenu.getIsmenu());
+            node.setNum(parentMenu.getNum());
+            node.setPath(parentMenu.getPath());
+            node.setIcon(parentMenu.getIcon());
+            node.setAppCode(parentMenu.getAppCode());
+
+            node.setChildren(result);
+            List<MenuNode> result1 = new ArrayList<>();
+            result1.add(node);
+            return result1;
+        }
+
+        return result;
     }
 
     @RequestMapping("/listAllByTree")
